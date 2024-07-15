@@ -1,0 +1,31 @@
+==============================
+redis-server
+redis-cli
+==============================
+
+/** テストデータ */
+HSET aiueo name kakikukeko
+HSET test/10/1 name aa
+HSET test/10/2 name ii
+HSET test/10/3 name uu
+HSET test/10/4 name ee
+HSET test/10/5 name oo
+
+/** 削除(コマンド1個ずつ) */
+DEL test/10/1
+DEL test/10/2
+DEL test/10/3
+DEL test/10/4
+DEL test/10/5
+
+==============================
+一括コマンド
+==============================
+/** 件数確認 */
+KEYS test/10/*
+
+/** バックアップ */
+for key in $(redis-cli KEYS test/10/*); do echo ${key}; redis-cli HGETALL ${key}; done
+
+/** 削除 */
+redis-cli KEYS test/10/* | xargs redis-cli DEL
