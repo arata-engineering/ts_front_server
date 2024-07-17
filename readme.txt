@@ -124,3 +124,32 @@ npx nodemon
 ----------------------------------------------
 ==============================================
 
+★☆★☆★☆★☆★☆ioredis★☆★☆★☆★☆★☆
+==============================================
+npm i -D ioredis@1.0.11 @types/ioredis
+----------------------------------------------
+https://www.npmjs.com/package/@types/ioredis
+==============================================
+
+https://qiita.com/kooohei/items/0e788a2ce8c30f9dba53
+https://qiita.com/Mayumi_Pythonista/items/ea8ee2a0a9f6cbd90ef7
+https://qiita.com/negi524/items/bb7a2f0331b3d74d863b
+brew install docker//brewじゃなくてDesctopをインストールする必要あり
+//　コンテナを落とす
+docker pull redis:7.2.4-alpine
+// コンテナを起動(run=create(containerの作成)とstart) // -d バックグラウンドで起動
+docker run -d --name redis -it redis:7.2.4-alpine
+// コンテナにログイン
+docker exec -it redis sh
+　→exitで退出
+// 対話モード起動
+redic-cli
+
+// プロセス確認
+docker ps
+// プロセス確認(停止中のプロセスを含めて)
+docker ps -a
+// プロセス停止
+docker stop プロセス
+// プロセス再開
+docker stop プロセス
