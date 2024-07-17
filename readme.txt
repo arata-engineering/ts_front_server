@@ -94,9 +94,33 @@ https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
 
 ★☆★☆★☆★☆★☆express★☆★☆★☆★☆★☆
 ==============================================
+
 ----------------------------------------------
 npm i express
 npm i -D @types/express
 ==============================================
 
+★☆★☆★☆★☆★☆nodemon★☆★☆★☆★☆★☆
+==============================================
+#1 nodemonのインストール
+npm i -D nodemon ts-node
+----------------------------------------------
+https://medium.com/@dinubhagya97/how-to-set-up-a-node-js-typescript-express-project-ddf4b8fe4af6
+https://zenn.dev/youtuber/articles/0ef2c08685d229
+https://www.npmjs.com/package/nodemon
+==============================================
+#2 nodemon.jsonを作成
+----------------------------------------------
+・「nodemon.json」を作成
+・下記を設定
+{
+    "watch": ["server"],
+    "ext": "ts",
+    "exec": "ts-node ./server/practice/server/practiceServerExpress.ts"
+}
+==============================================
+#3 実行
+npx nodemon
+----------------------------------------------
+==============================================
 
