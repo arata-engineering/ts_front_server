@@ -1,6 +1,14 @@
-const animal1: {
-    name: string
-} = {
-    name: "giraffe"
+type Consumer<T> = (t: T) => void;
+type Supplier<T> = () => T;
+const f: (consumer: Consumer<string>, supplier: Supplier<string>) => void = (consumer, supplier) => {
+    consumer("hello");
+    console.log(supplier());
 }
-console.log(JSON.stringify({name: "ta", age: 14, bool: true, info: {status: 1}}));
+
+f((value) => console.log(value), () => "TEST");
+
+const consumer: Consumer<string> = console.log;
+consumer("aaa");
+
+const supplier: Supplier<string> = () =>"TEST";
+console.log(supplier());
