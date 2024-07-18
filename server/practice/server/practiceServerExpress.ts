@@ -49,11 +49,17 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 const redis: Redis = new Redis({
     port: 6379,
     host: "localhost",
-    password: process.env.REDIS_PASSWORD,
     enableOfflineQueue: false
 });
-redis.once("ready", () => {
+const redisInit = async () => {
+    await Promise.all([
+        redis.set("User1", JSON.stringify({id: 1, name: "alpha"})),
+        redis.set("User2", JSON.stringify({id: 1, name: "bravo"}))
+    ]);
+}
+redis.once("ready", async () => {
     try {
+        await redisInit();
         app.listen(3000, () => console.log(`server started`));
     } catch (e) {
         console.log(e);
