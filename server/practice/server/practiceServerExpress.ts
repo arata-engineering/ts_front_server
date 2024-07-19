@@ -65,3 +65,8 @@ redis.once("ready", async () => {
         console.log(e);
     }
 });
+
+redis.on("error", (err) => {
+   console.log(err);
+   process.exit(1); 
+});

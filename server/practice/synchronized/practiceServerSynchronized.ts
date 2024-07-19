@@ -38,3 +38,4 @@ const sleep: (time: number) => Promise<void> = time => {
 }
 sleep(1000).then(() => console.log("2秒たちました"));
 
+type executer = (value: void | PromiseLike<void>) => void
