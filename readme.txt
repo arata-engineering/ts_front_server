@@ -141,6 +141,14 @@ npm i -D ioredis@1.0.11 @types/ioredis
 https://www.npmjs.com/package/@types/ioredis
 ==============================================
 
+★☆★☆★☆★☆★☆config★☆★☆★☆★☆★☆
+==============================================
+npm install config
+npm i --save-dev @types/config
+----------------------------------------------
+https://www.npmjs.com/package/config
+==============================================
+
 https://qiita.com/kooohei/items/0e788a2ce8c30f9dba53
 https://qiita.com/Mayumi_Pythonista/items/ea8ee2a0a9f6cbd90ef7
 https://qiita.com/negi524/items/bb7a2f0331b3d74d863b

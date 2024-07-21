@@ -1,4 +1,5 @@
-import path, { join, resolve } from "path";
+import path from "path";
+import config from "config";
 
 type Consumer<T> = (t: T) => void;
 type Supplier<T> = () => T;
@@ -18,9 +19,5 @@ console.log(supplier());
 console.log(path.normalize(path.join(__dirname, "../../template", "index.ejs")));
 
 console.log("==start==")
-
-const relativePath: string = path.relative(__dirname, "public");
-console.log(relativePath);
-
-const relativePath2: string = path.relative(__dirname, "ts_front_server/public");
-console.log(relativePath2);
+console.log(config.get("Customer"));
+console.log(process.env.NODE_ENV);
