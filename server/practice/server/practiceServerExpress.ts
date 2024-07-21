@@ -1,6 +1,8 @@
 import express from "express";
 import Redis from "ioredis";
 
+//"exec": "ts-node ./server/practice/server/practiceServerExpress.ts"
+
 const app: express.Express = express();
 
 /** ミドルウェアの共通化 */
