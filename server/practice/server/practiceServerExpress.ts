@@ -1,12 +1,14 @@
 import express from "express";
 import Redis from "ioredis";
+import path from "path";
 
 //"exec": "ts-node ./server/practice/server/practiceServerExpress.ts"
 
 const app: express.Express = express();
 
-/** ミドルウェアの共通化 */
 /**
+ * ミドルウェアの共通化
+ * 
  * #useを呼び出すことで共通のミドルウェアとして呼び出すことができます。
  * 例えば、処理の一番上で呼び出すことにより#useが一番最初に動くミドルウェアとして実行されます。
  */
@@ -14,6 +16,14 @@ app.use((req, res, next) => {
     console.log("midlle wareの共通化");
     next();
 });
+
+/**
+ * 静的ファイル配信
+ * 
+ * public配下のページにアクセスが可能となる
+ * 例）http://localhost:3000/help.html
+ */
+app.use(express.static(path.join(__dirname, "../../../", "public")));
 
 /** 基本のルーティング */
 app.get("/", (req, res) => {
