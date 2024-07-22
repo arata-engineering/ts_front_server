@@ -1,10 +1,12 @@
 import express from "express";
 import Redis from "ioredis";
 import path from "path";
+import { getApiRedisUsers, getRedisClient, getRedisUsers, redisInit } from "./redis/practiceServerRedisManager";
 
 //"exec": "ts-node ./server/practice/server/practiceServerExpress.ts"
 
 const app: express.Express = express();
+app.set("view engine", "ejs");
 
 /**
  * ミドルウェアの共通化
@@ -44,7 +46,7 @@ app.get("/next/", (req, res, next) => {
 });
 
 /** Redisデータ取得後にJSON返却 */
-app.get("/user/:id", async (req, res, next) => {
+app.get("/api/user/:id", async (req, res, next) => {
     const userId = req.params.id;
     const valueOfRedis: string | null = await redis.get(userId);
     if (valueOfRedis === null) {
@@ -54,26 +56,17 @@ app.get("/user/:id", async (req, res, next) => {
     const json = JSON.parse(valueOfRedis);
     res.status(200).json(json);
 });
-app.get("/users/", async (req, res, next) => {
+app.get("/api/users/", async (req, res, next) => {
     try {
-        const keyarr: string[] = await redis.keys("User*");
-        console.log(`keys : ${keyarr}`);
-
-        const stream = redis.scanStream({
-            match: "User*"
-        });
-        const users: string[] = [];
-        for await (const resultKeys of stream) {
-            for (const key of resultKeys) {
-                const value = await redis.get(key);
-                const json: any = JSON.parse(value as string);
-                users.push(json);
-            }
-        }
+        const users = await getRedisUsers();
         res.status(200).send(users);
     } catch(e) {
         next(e);
     }
+});
+app.get("/users/", async (req, res) => {
+    const users: object[] = await getApiRedisUsers();
+    res.render(path.join(__dirname, "../../../template", "index.ejs"), {users});
 });
 
 /** 包括的エラーハンドリング */
@@ -95,18 +88,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 /**
  * サーバ起動とRedis通信
  */
-const redis: Redis = new Redis({
-    port: 6379,
-    host: "localhost",
-    enableOfflineQueue: false
-});
-const redisInit = async () => {
-    await Promise.all([
-        redis.set("User1", JSON.stringify({ id: 1, name: "alpha" })),
-        redis.set("User2", JSON.stringify({ id: 2, name: "bravo" })),
-        redis.set("User3", JSON.stringify({ id: 3, name: "trip" }))
-    ]);
-}
+const redis: Redis = getRedisClient();
 redis.once("ready", async () => {
     try {
         await redisInit();
