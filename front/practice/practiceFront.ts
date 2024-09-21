@@ -4,3 +4,7 @@
       location.replace(`${location.href}?${redirectPageParams.toString()}`);
     }
 })();
+
+const containerElementOfJquery: JQuery<HTMLElement> = $(".container");
+const containerElement = containerElementOfJquery.get(0);
+(containerElement as HTMLElement).textContent = "aaaa";
