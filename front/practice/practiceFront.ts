@@ -1,10 +1,10 @@
-(() => {
-    if (!location.search.length && !location.href.endsWith("?")) {
-      const redirectPageParams: URLSearchParams = new URLSearchParams({key: "zaiko"});
-      location.replace(`${location.href}?${redirectPageParams.toString()}`);
-    }
-})();
+const animalArray: readonly string[] = ["ant", "giraffe", "gorirra"];
 
-const containerElementOfJquery: JQuery<HTMLElement> = $(".container");
-const containerElement = containerElementOfJquery.get(0);
-(containerElement as HTMLElement).textContent = "aaaa";
+const map: ReadonlyMap<string, string> = new Map([
+  ["name", "tanaka"],
+  ["age", "22"]
+]);
+
+for (const animal of animalArray) {
+  console.log(animal);
+}
