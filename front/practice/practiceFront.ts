@@ -1,10 +1,3 @@
-const animalArray: readonly string[] = ["ant", "giraffe", "gorirra"];
-
-const map: ReadonlyMap<string, string> = new Map([
-  ["name", "tanaka"],
-  ["age", "22"]
-]);
-
-for (const animal of animalArray) {
-  console.log(animal);
-}
+const animalArray: ReadonlyArray<string> = ["wada", "tanaka", "wada"];
+const uniqueAnimalArray: ReadonlyArray<string> = [...new Set(animalArray)];
+uniqueAnimalArray.forEach(animal => console.log(animal));
